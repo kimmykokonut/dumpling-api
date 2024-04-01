@@ -20,5 +20,6 @@ from dumplings import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('dumplings/', views.dumpling_list)
+    path('dumplings/', views.dumpling_list),
+    path('dumplings/<int:id>', views.dumpling_detail)
 ]

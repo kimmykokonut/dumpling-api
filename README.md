@@ -15,6 +15,7 @@ _by Kim Robinson_
 ![Database diagram](./dumplings/static/dumplings/images/sql.png)
 
 ### Endpoints
+- testing with Postman
 Base URL: localhost:8000/
 GET http://localhost:8000/api/dumplings/
 GET http://localhost:8000/api/dumplings/{id}

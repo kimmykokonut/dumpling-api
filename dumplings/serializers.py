@@ -4,4 +4,4 @@ from .models import Dumpling
 class DumplingSerializer(serializers.ModelSerializer):
   class Meta:
     model = Dumpling
-    fields = ['id', 'name', 'description']
+    fields = ['id', 'name', 'description', 'origin']
