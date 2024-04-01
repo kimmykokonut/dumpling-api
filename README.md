@@ -11,6 +11,14 @@ _by Kim Robinson_
 - Manage dotenv
 - Set up admin and user accounts
 
+ToDo:
+- WebApi-user auth here or React?
+- Allow user to have crud for origin and tag? (more endpoints)
+- Link m:m Tag to Dumpling
+...then
+- Build react client
+
+
 ### SQL Database
 ![Database diagram](./dumplings/static/dumplings/images/sql.png)
 
