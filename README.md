@@ -59,6 +59,22 @@ response: {
     "description": "steamed and yummy",
     "origin": 5
 }
+PUT dumpling by id:
+http://127.0.0.1:8000/dumplings/1
+body: {
+    "name": "Ravioli",
+    "description": "pillowy soft, filled with ricotta cheese",
+    "origin": 3
+}
+response: {
+    "id": 1,
+    "name": "Ravioli",
+    "description": "Wheat-based dough that's pillowy soft, filled with ricotta cheese",
+    "origin": 3
+}
+DELETE dumpling by id:
+http://127.0.0.1:8000/dumplings/1
+response: 204 No Content
 
 
 ### Stretch Goals

@@ -17,9 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from dumplings import views
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dumplings/', views.dumpling_list),
     path('dumplings/<int:id>', views.dumpling_detail)
 ]
+# to allow url like dumplings.json
+urlpatterns = format_suffix_patterns(urlpatterns)

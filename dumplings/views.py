@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 @api_view(['GET', 'POST'])
-def dumpling_list(request):
+def dumpling_list(request, format=None):
   # GET /dumplings
   if request.method == 'GET':
     # name url from urls.py pattern
@@ -14,10 +14,12 @@ def dumpling_list(request):
     dumplings = Dumpling.objects.all()
     # serialize data
     serializer = DumplingSerializer(dumplings, many=True)
-    #return json, as list
+    ##return json, as list
     # return JsonResponse(serializer.data, safe=False)
-    # to return as json object
-    return JsonResponse({"dumplings": serializer.data})
+    ## to return as json object
+    # return JsonResponse({"dumplings": serializer.data})
+    ## !to return-BestPractice-using RestFramework Response
+    return Response(serializer.data)
   
   if request.method == 'POST':
     # add a dumpling
@@ -28,7 +30,7 @@ def dumpling_list(request):
   
 # dumplings/1
 @api_view(['GET', 'PUT', 'DELETE'])  
-def dumpling_detail(request, id):
+def dumpling_detail(request, id, format=None):
   #make sure valid request
   try: 
     dumpling = Dumpling.objects.get(pk=id)
