@@ -38,9 +38,14 @@ def dumpling_detail(request, id):
   if request.method == 'GET':
     serializer = DumplingSerializer(dumpling)
     return Response(serializer.data)
-  elif request.method == 'POST':
-    pass
+  elif request.method == 'PUT':
+    serializer = DumplingSerializer(dumpling, data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
   elif request.method == 'DELETE':
-    pass
+    dumpling.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
 

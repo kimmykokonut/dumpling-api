@@ -23,6 +23,44 @@ POST http://localhost:8000/api/dumplings/
 PUT http://localhost:8000/api/dumplings/{id}
 DELETE http://localhost:8000/api/dumplings/{id}
 
+See all dumplings:
+GET http://127.0.0.1:8000/dumplings/
+Response:
+{
+    "dumplings": [
+        {
+            "id": 1,
+            "name": "Ravioli",
+            "description": "pillowy soft, filled with ricotta cheese",
+            "origin": 3
+        },
+        {
+            "id": 2,
+            "name": "Momo",
+            "description": "steamed and yummy",
+            "origin": 5
+        }]
+}
+
+Create new dumpling:
+POST http://127.0.0.1:8000/dumplings/
+Body: {
+            "name": "Suet Dumplings",
+            "description": "British classic, cooked on top of a gravy-based stew",
+            "origin": 4
+        }
+Response: 201 created
+
+GET dumpling by id:
+http://127.0.0.1:8000/dumplings/2
+response: {
+    "id": 2,
+    "name": "Momo",
+    "description": "steamed and yummy",
+    "origin": 5
+}
+
+
 ### Stretch Goals
 - Full crud for admin role
 - User can crud their own creation, but read-only for other items
