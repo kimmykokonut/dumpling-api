@@ -26,7 +26,7 @@ urlpatterns = [
     path('tags/', views.tag_list),
     path('tags/<int:pk>', views.tag_detail),
     path('origins/', views.origin_list),
-    #path('origins/<int:id>', views.origin_detail)
+    path('origins/<int:pk>', views.origin_detail)
 
 ]
 # to allow url like dumplings.json

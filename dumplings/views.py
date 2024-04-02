@@ -83,7 +83,7 @@ def tag_detail(request, pk):
   elif request.method == 'DELETE':
     tag.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
-  
+# /origins
 @api_view(['GET', 'POST'])
 def origin_list(request, format=None):
   if request.method == 'GET':
@@ -95,3 +95,23 @@ def origin_list(request, format=None):
     if serializer.is_valid():
       serializer.save()
       return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+# /origins/1
+@api_view(['GET', 'PUT', 'DELETE'])
+def origin_detail(request, pk):
+  try:
+    origin = Origin.objects.get(pk=pk)
+  except Origin.DoesNotExist:
+    return Response(status=status.HTTP_404_NOT_FOUND)
+  if request.method == 'GET':
+    serializer = OriginSerializer(origin)
+    return Response(serializer.data)
+  elif request.method == 'PUT':
+    serializer = OriginSerializer(origin, data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+  elif request.method == 'DELETE':
+    origin.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
