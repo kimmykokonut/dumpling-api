@@ -25,6 +25,42 @@ ToDo:
 ### Endpoints
 - testing with Postman
 Base URL: localhost:8000/
+![Example Api Call using REST Framework](./dumplings/static/dumplings/images/api.png)
+
+#### Authentication
+POST http://127.0.0.1:8000/signup
+Content-Type: application/json
+Body: { "username": "tester", "password": "Pass1234!" }
+
+Response:
+{
+  "token": "[secret-token-here]",
+  "user": {
+    "id": 2,
+    "username": "tester",
+    "password": "[hashed-password-here]",
+    "email": "test@test.com"
+  }
+}
+
+POST http://127.0.0.1:8000/login
+Content-Type: application/json
+Body:
+{ "username": "tester", "password": "Pass1234!", "email": "test@test.com"
+}
+Response: 
+{
+  "token": "[secret-token-here]",
+  "user": {
+    "id": 2,
+    "username": "tester",
+    "password": "[hashed-password-here]",
+    "email": "test@test.com"
+  }
+}
+---
+#### Dumpling Endpoints
+
 GET http://localhost:8000/api/dumplings/
 GET http://localhost:8000/api/dumplings/{id}
 POST http://localhost:8000/api/dumplings/
@@ -83,6 +119,8 @@ response: {
 DELETE dumpling by id:
 http://127.0.0.1:8000/dumplings/1
 response: 204 No Content
+
+
 
 
 ### Stretch Goals
