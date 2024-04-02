@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Dumpling, Tag
+from .models import Dumpling, Tag, Origin
 
 class DumplingSerializer(serializers.ModelSerializer):
   class Meta:
@@ -13,3 +13,8 @@ class TagSerializer(serializers.ModelSerializer):
     model = Tag
     fields = ['id', 'name', 'dumplings']
     # 'dumplings' is M:M FK
+
+class OriginSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Origin
+    fields = ['id', 'country']
