@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from dumplings import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
@@ -26,8 +26,10 @@ urlpatterns = [
     path('tags/', views.tag_list),
     path('tags/<int:pk>', views.tag_detail),
     path('origins/', views.origin_list),
-    path('origins/<int:pk>', views.origin_detail)
-
+    path('origins/<int:pk>', views.origin_detail),
+    re_path('login', views.login),
+    re_path('signup', views.signup),
+    re_path('test_token', views.test_token)
 ]
 # to allow url like dumplings.json
 urlpatterns = format_suffix_patterns(urlpatterns)

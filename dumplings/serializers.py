@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Dumpling, Tag, Origin
+from django.contrib.auth.models import User
 
 class DumplingSerializer(serializers.ModelSerializer):
   class Meta:
@@ -18,3 +19,8 @@ class OriginSerializer(serializers.ModelSerializer):
   class Meta:
     model = Origin
     fields = ['id', 'country']
+
+class UserSerializer(serializers.ModelSerializer):
+  class Meta(object):
+    model = User
+    fields = ['id', 'username', 'password', 'email']
