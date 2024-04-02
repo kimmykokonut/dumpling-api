@@ -1,6 +1,6 @@
 from django.http import JsonResponse
-from .models import Dumpling
-from .serializers import DumplingSerializer
+from .models import Dumpling, Tag, Origin
+from .serializers import DumplingSerializer, TagSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -30,7 +30,7 @@ def dumpling_list(request, format=None):
   
 # dumplings/1
 @api_view(['GET', 'PUT', 'DELETE'])  
-def dumpling_detail(request, id, format=None):
+def dumpling_detail(request, id,):
   #make sure valid request
   try: 
     dumpling = Dumpling.objects.get(pk=id)
@@ -50,4 +50,16 @@ def dumpling_detail(request, id, format=None):
     dumpling.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
-
+#tags/
+@api_view(['GET', 'POST'])
+def tag_list(request, format=None):
+  if request.method == 'GET':
+    tags = Tag.objects.all(); 
+    serializer = TagSerializer(tags, many=True)
+    return Response(serializer.data)
+  
+  if request.method == 'POST':
+    serializer = TagSerializer(data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data, status=status.HTTP_201_CREATED)
