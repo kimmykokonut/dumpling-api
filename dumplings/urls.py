@@ -24,6 +24,7 @@ urlpatterns = [
     path('dumplings/', views.dumpling_list), #Index&Create
     path('dumplings/<int:id>', views.dumpling_detail),#Details/update/delete
     path('tags/', views.tag_list),
+    path('tags/<int:pk>', views.tag_detail)
 ]
 # to allow url like dumplings.json
 urlpatterns = format_suffix_patterns(urlpatterns)

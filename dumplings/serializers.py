@@ -7,6 +7,7 @@ class DumplingSerializer(serializers.ModelSerializer):
     fields = ['id', 'name', 'description', 'origin']
 
 class TagSerializer(serializers.ModelSerializer):
+  # need to make dumplings in json body optional
   dumplings = serializers.PrimaryKeyRelatedField(many=True, queryset=Dumpling.objects.all(), required=False)
   class Meta:
     model = Tag
