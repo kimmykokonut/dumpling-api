@@ -4,6 +4,7 @@ from .serializers import DumplingSerializer, TagSerializer, OriginSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
 
 @api_view(['GET', 'POST'])
 def dumpling_list(request, format=None):
@@ -12,15 +13,21 @@ def dumpling_list(request, format=None):
     # name url from urls.py pattern
     # get all dumplings
     dumplings = Dumpling.objects.all()
+    # call paginator in view
+    paginator = PageNumberPagination()
+    paginator.page_size = 20
+    #apply pagination
+    paginated_dumplings = paginator.paginate_queryset(dumplings, request)
     # serialize data
-    serializer = DumplingSerializer(dumplings, many=True)
+    serializer = DumplingSerializer(paginated_dumplings, many=True)
     ##return json, as list
     # return JsonResponse(serializer.data, safe=False)
     ## to return as json object
     # return JsonResponse({"dumplings": serializer.data})
     ## !to return-BestPractice-using RestFramework Response
-    return Response(serializer.data)
-  
+    #return Response(serializer.data)
+    #return paginated data
+    return paginator.get_paginated_response(serializer.data)
   if request.method == 'POST':
     # add a dumpling
     serializer = DumplingSerializer(data=request.data)
