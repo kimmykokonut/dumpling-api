@@ -10,6 +10,7 @@ _by Kim Robinson_
 - Build a front end React client to consume this webapi[link to come]
 - Manage dotenv
 - Set up admin and user accounts and manage user permissions
+- To integrate a React client, wip [here](https://github.com/kimmykokonut/dumpling-client)
 
 ### A User can:
 - Register for an account
