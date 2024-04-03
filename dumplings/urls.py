@@ -29,7 +29,8 @@ urlpatterns = [
     path('origins/<int:pk>', views.origin_detail),
     re_path('login', views.login),
     re_path('signup', views.signup),
-    re_path('test_token', views.test_token)
+    re_path('test_token', views.test_token),
+    re_path('logout', views.logout)
 ]
 # to allow url like dumplings.json
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -1,8 +1,5 @@
 from django.db import models
 # so django knows models/db
-# from pygments.lexers import get_lexer_by_name
-# from pygments.formatters.html import HtmlFormatter
-# from pygments import highlight
 
 class Dumpling(models.Model): 
   # no need add DumplingId

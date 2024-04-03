@@ -42,6 +42,13 @@ def signup(request):
 def test_token(request):
   return Response("passed for {}".format(request.user.email))
 
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+def logout(request):
+  #delete token
+  request.user.auth_token.delete()
+  return Response("logged out: {}".format(request.user.email), status=status.HTTP_200_OK)
+
 @api_view(['GET', 'POST'])
 def dumpling_list(request, format=None):
   # GET /dumplings

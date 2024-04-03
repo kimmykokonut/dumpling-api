@@ -28,10 +28,10 @@ Base URL: localhost:8000/
 ![Example Api Call using REST Framework](./dumplings/static/dumplings/images/api.png)
 
 #### Authentication
+
 POST http://127.0.0.1:8000/signup
 Content-Type: application/json
-Body: { "username": "tester", "password": "Pass1234!" }
-
+Body: { "username": "tester", "password": "[password]" }
 Response:
 {
   "token": "[secret-token-here]",
@@ -46,7 +46,7 @@ Response:
 POST http://127.0.0.1:8000/login
 Content-Type: application/json
 Body:
-{ "username": "tester", "password": "Pass1234!", "email": "test@test.com"
+{ "username": "tester", "password": "[password]", "email": "test@test.com"
 }
 Response: 
 {
@@ -58,6 +58,7 @@ Response:
     "email": "test@test.com"
   }
 }
+
 ---
 #### Dumpling Endpoints
 
