@@ -9,15 +9,14 @@ _by Kim Robinson_
 - Manage one-to-many and many-to-many relationships
 - Build a front end React client to consume this webapi[link to come]
 - Manage dotenv
-- Set up admin and user accounts
+- Set up admin and user accounts and manage user permissions
 
-ToDo:
-- WebApi-user auth here or React?
-- Allow user to have crud for origin and tag? (more endpoints)
-- Link m:m Tag to Dumpling
-...then
-- Build react client
-
+### A User can:
+- Register for an account
+- Sign in
+- Sign out
+- See dumpling data
+- Create, edit and delete created dumplings
 
 ### SQL Database
 ![Database diagram](./dumplings/static/dumplings/images/sql.png)
@@ -58,12 +57,8 @@ Response:
     "email": "test@test.com"
   }
 }
-/logout ENDPOINT deletes your token
+/logout ENDPOINT deletes your token and ends your session
 
-to create Dumpling:
-same body.
-need auth in Header: Key: Authorization; Value: Token <token-here>
-the signed in user will be attached to the dumpling item.
 ---
 #### Dumpling Endpoints
 
@@ -110,7 +105,10 @@ response: {
     "origin": 5
 }
 PUT dumpling by id:
+(You can only edit a dumpling you have created, put your token in the header like so)
 http://127.0.0.1:8000/dumplings/1
+Content-Type: application/json
+Authorization: Token [TOKEN-HERE]
 body: {
     "name": "Ravioli",
     "description": "pillowy soft, filled with ricotta cheese",
@@ -120,22 +118,25 @@ response: {
     "id": 1,
     "name": "Ravioli",
     "description": "Wheat-based dough that's pillowy soft, filled with ricotta cheese",
-    "origin": 3
+    "origin": 3,
+    "owner": [YOUR-USERNAME]
 }
+
 DELETE dumpling by id:
 http://127.0.0.1:8000/dumplings/1
-response: 204 No Content
+Content-Type: application/json
+Authorization: Token [TOKEN-HERE]
+Response: 204 No Content
 
 
 
 
 ### Stretch Goals
-- Full crud for admin role
-- User can crud their own creation, but read-only for other items
 - Add comment/rating section
 - Add a find this dumpling feature which can link to a local restaurant serving it and integrate MapBox for a waypoint and/or directions
 - User dashboard to save favorite dumplings
 - Add a recipe option? To share dumpling recipes. 
+- Allow user to have crud for origin and tag? (more endpoints)
 
 ### License
 See license.md for more information
