@@ -7,14 +7,11 @@ class Dumpling(models.Model):
   name = models.CharField(max_length=255)
   description = models.CharField(max_length=500)
   origin = models.ForeignKey('Origin', on_delete=models.SET_NULL, null=True, default=1, related_name='dumplings')
-  # created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-  
-  # create method on dumpling obj so in admin it is it's name vs dumpling object 1
+  # who created dumpling
+  owner = models.ForeignKey('auth.User', related_name='dumplings', on_delete=models.CASCADE)
+    
   def __str__(self):
     return self.name + ': ' + self.description
-  # for auth?
-  # def save(self, *args, **kwargs):
-
   
 class Origin(models.Model):
   country = models.CharField(max_length=60)
@@ -23,7 +20,7 @@ class Origin(models.Model):
   
 class Tag(models.Model):
   name = models.CharField(max_length=50)
-  dumplings = models.ManyToManyField(Dumpling, related_name='tags')
+  dumplings = models.ManyToManyField(Dumpling, related_name='tags', blank=True)
 
   def __str__(self):
     return self.name

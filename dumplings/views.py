@@ -50,6 +50,7 @@ def logout(request):
   return Response("logged out: {}".format(request.user.email), status=status.HTTP_200_OK)
 
 @api_view(['GET', 'POST'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def dumpling_list(request, format=None):
   # GET /dumplings
   if request.method == 'GET':
@@ -75,8 +76,9 @@ def dumpling_list(request, format=None):
     # add a dumpling
     serializer = DumplingSerializer(data=request.data)
     if serializer.is_valid():
-      serializer.save()
+      serializer.save(owner=request.user)
       return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
   
 # dumplings/1
 @api_view(['GET', 'PUT', 'DELETE'])  
@@ -90,15 +92,22 @@ def dumpling_detail(request, id,):
   if request.method == 'GET':
     serializer = DumplingSerializer(dumpling)
     return Response(serializer.data)
-  elif request.method == 'PUT':
-    serializer = DumplingSerializer(dumpling, data=request.data)
-    if serializer.is_valid():
-      serializer.save()
-      return Response(serializer.data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-  elif request.method == 'DELETE':
-    dumpling.delete()
-    return Response(status=status.HTTP_204_NO_CONTENT)
+  # check logged in user is owner
+  elif request.method in ['PUT', 'DELETE']:
+    print('Dumpling owner:', dumpling.owner)
+    print('Request user:', request.user)
+   
+    if dumpling.owner != request.user:
+      return Response({'message': 'You do not have permission to edit or delete this dumpling.'}, status=status.HTTP_403_FORBIDDEN)
+    if request.method == 'PUT':
+      serializer = DumplingSerializer(dumpling, data=request.data)
+      if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+      dumpling.delete()
+      return Response(status=status.HTTP_204_NO_CONTENT)
 
 #tags/
 @api_view(['GET', 'POST'])

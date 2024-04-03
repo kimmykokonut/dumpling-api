@@ -13,11 +13,41 @@ Content-Type: application/json
 ###
 GET http://127.0.0.1:8000/test_token
 Content-Type: application/json
-Authorization: Token 4346d93ee7867b63d5616a57635b619624c2dc0f
+Authorization: Token 940e5d216fb8dc980663892c631be41308a4df66
 
 {}
 
 ###
 POST http://127.0.0.1:8000/logout
 Content-Type: application/json
-Authorization: Token 4346d93ee7867b63d5616a57635b619624c2dc0f
+Authorization: Token 586a5e0ac1ce0d9d9e3fd941495bc2ba5512e921
+###
+POST http://127.0.0.1:8000/dumplings/
+Content-Type: application/json
+Authorization: Token 940e5d216fb8dc980663892c631be41308a4df66
+
+{
+  "name": "Suet Dumplings",
+  "description": "British classic, cooked on top of a gravy-based stew",
+  "origin": 4
+}
+###
+GET http://127.0.0.1:8000/dumplings/11
+Content-Type: application/json
+Authorization: Token 940e5d216fb8dc980663892c631be41308a4df66
+
+###
+PUT http://127.0.0.1:8000/dumplings/11
+Content-Type: application/json
+Authorization: Token 940e5d216fb8dc980663892c631be41308a4df66
+
+{
+  "name": "Yucky Dumplings",
+  "description": "British classic, cooked on top of a gravy-based stew",
+  "origin": 4
+}
+
+###
+DELETE http://127.0.0.1:8000/dumplings/11
+Content-Type: application/json
+Authorization: Token 940e5d216fb8dc980663892c631be41308a4df66
