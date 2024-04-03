@@ -13,11 +13,11 @@ Content-Type: application/json
 ###
 GET http://127.0.0.1:8000/test_token
 Content-Type: application/json
-Authorization: Token 12a22dcb3cf799bfcabbe75f3fb614e6b9f894f9
+Authorization: Token 4346d93ee7867b63d5616a57635b619624c2dc0f
 
 {}
 
 ###
 POST http://127.0.0.1:8000/logout
 Content-Type: application/json
-Authorization: Token 12a22dcb3cf799bfcabbe75f3fb614e6b9f894f9
+Authorization: Token 4346d93ee7867b63d5616a57635b619624c2dc0f
