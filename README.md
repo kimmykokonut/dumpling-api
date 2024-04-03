@@ -58,7 +58,12 @@ Response:
     "email": "test@test.com"
   }
 }
+/logout ENDPOINT deletes your token
 
+to create Dumpling:
+same body.
+need auth in Header: Key: Authorization; Value: Token <token-here>
+the signed in user will be attached to the dumpling item.
 ---
 #### Dumpling Endpoints
 

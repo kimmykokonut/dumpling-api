@@ -50,6 +50,7 @@ def logout(request):
   return Response("logged out: {}".format(request.user.email), status=status.HTTP_200_OK)
 
 @api_view(['GET', 'POST'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def dumpling_list(request, format=None):
   # GET /dumplings
   if request.method == 'GET':
@@ -75,8 +76,9 @@ def dumpling_list(request, format=None):
     # add a dumpling
     serializer = DumplingSerializer(data=request.data)
     if serializer.is_valid():
-      serializer.save()
+      serializer.save(owner=request.user)
       return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
   
 # dumplings/1
 @api_view(['GET', 'PUT', 'DELETE'])  

@@ -2,10 +2,16 @@ from rest_framework import serializers
 from .models import Dumpling, Tag, Origin
 from django.contrib.auth.models import User
 
+class OwnerSerializer(serializers.ModelSerializer):
+  class Meta(object):
+    model = User
+    fields = ['username']
+
 class DumplingSerializer(serializers.ModelSerializer):
+  owner = OwnerSerializer(read_only=True)
   class Meta:
     model = Dumpling
-    fields = ['id', 'name', 'description', 'origin']
+    fields = ['id', 'name', 'description', 'origin', 'tags', 'owner']
 
 class TagSerializer(serializers.ModelSerializer):
   # need to make dumplings in json body optional
