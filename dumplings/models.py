@@ -20,7 +20,7 @@ class Origin(models.Model):
   
 class Tag(models.Model):
   name = models.CharField(max_length=50)
-  dumplings = models.ManyToManyField(Dumpling, related_name='tags')
+  dumplings = models.ManyToManyField(Dumpling, related_name='tags', blank=True)
 
   def __str__(self):
     return self.name
