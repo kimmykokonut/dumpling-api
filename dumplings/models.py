@@ -7,6 +7,7 @@ class Dumpling(models.Model):
   name = models.CharField(max_length=255)
   description = models.CharField(max_length=500)
   origin = models.ForeignKey('Origin', on_delete=models.SET_NULL, null=True, default=1, related_name='dumplings')
+  imageUrl = models.CharField(max_length=500)
   # who created dumpling
   owner = models.ForeignKey('auth.User', related_name='dumplings', on_delete=models.CASCADE)
     
