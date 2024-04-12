@@ -1,6 +1,11 @@
 # Dumpling Truck WebApi
 _by Kim Robinson_
 
+* See the API [live on Render](https://dumpling-api.onrender.com) * 
+- Note the base url for the api calls is now https://dumpling-api.onrender.com
+(Readme to be updated at a later time reflecting the change from localhost800 to the hosted site)
+
+
 ### A webapi containing dumpling information, categories and tags.
 
 #### Goals:
