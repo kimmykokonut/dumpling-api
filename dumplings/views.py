@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from .models import Dumpling, Tag, Origin
 from .serializers import DumplingSerializer, TagSerializer, OriginSerializer, UserSerializer
 from rest_framework.decorators import api_view
@@ -13,6 +13,8 @@ from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
+def welcome(request):
+  return HttpResponse("Welcome to the Dumpling API!")
 #for AUTH
 @api_view(['POST'])
 def login(request):
